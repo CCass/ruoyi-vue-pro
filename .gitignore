@@ -53,3 +53,8 @@ application-my.yaml
 /yudao-ui-app/unpackage/
 .DS_Store
 **/.DS_Store
+
+# 本机运行数据与独立前端仓库
+/.local/
+/.pnpm-store/
+/yudao-ui/yudao-ui-admin-vue3-master/

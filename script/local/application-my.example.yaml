@@ -1,0 +1,24 @@
+# 复制到项目根目录的 .local/application-my.yaml，填写本机连接信息。
+# 原项目目录含 # 时，通过 script/local 下的脚本构建和启动前端。
+spring:
+  datasource:
+    dynamic:
+      datasource:
+        master:
+          url: jdbc:mysql://127.0.0.1:3306/ruoyi-vue-pro?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true&rewriteBatchedStatements=true
+          username: ${YUDAO_DB_USERNAME}
+          password: ${YUDAO_DB_PASSWORD}
+        slave:
+          url: jdbc:mysql://127.0.0.1:3306/ruoyi-vue-pro?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true&rewriteBatchedStatements=true
+          username: ${YUDAO_DB_USERNAME}
+          password: ${YUDAO_DB_PASSWORD}
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 8
+      # 当前容器没有密码，省略 password；若以后设置密码，再添加实际值。
+
+logging:
+  file:
+    name: .local/logs/yudao-server.log
