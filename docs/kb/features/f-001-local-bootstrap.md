@@ -47,15 +47,15 @@
 .\script\local\Build-Local.ps1 -Service Frontend -CheckTypes
 ```
 
-当前路径含 `#`，请使用这些脚本处理 Vite 运行路径。脚本复用本机 `Y:` 到后端根目录的映射，必要时在盘符空闲时重建映射；源码仍在原目录中。若从未创建映射，会从预设空闲盘符中选择一个，并将选择保存到 `.local/frontend-path.json`。不会覆盖其它位置的映射。
+当前工作目录为 `E:\z. WorkSpace\1Develop\NccBaseProject\ruoyi-vue-pro-master-jdk17`。上层目录已由 `#Develop` 改为 `1Develop`，前端从新真实路径构建和运行。本项目的临时盘符和旧映射记录已移除。迁移时发现 pnpm 内部仍残留旧路径链接，因此已将旧 `node_modules` 移至 `.local/frontend-node_modules-before-path-rebuild`，按现有锁文件完整重建；检查 2,819 个依赖链接，均没有指向旧 `#Develop` 或 `Y:`。
 
-首次安装或需要重建前端依赖链接时：
+首次安装或刷新依赖时（迁移已有项目应先按上段说明移走旧 `node_modules`）：
 
 ```powershell
 .\script\local\Build-Local.ps1 -Service Frontend -Install
 ```
 
-这会在映射路径执行 `pnpm install --force --frozen-lockfile` 并构建，保持锁文件不变。Vite 开发服务会生成被忽略的全局类型声明，因此全新安装后应先启动一次前端，再执行 `-CheckTypes`。
+这会在当前项目路径执行 `pnpm install --force --frozen-lockfile` 并构建，保持锁文件不变。Vite 开发服务会生成被忽略的全局类型声明，因此全新安装后应先启动一次前端，再执行 `-CheckTypes`。
 
 启动脚本固定后端端口 48080，前端默认 80；前端可以通过 `-FrontendPort 3000` 指定空闲端口。若需要同时改变后端端口，应同时调整后端私有配置、启动脚本的就绪检查及前端 API 地址。
 
@@ -79,7 +79,7 @@
 - 实际账号登录、租户查询、权限菜单、用户分页和字典接口返回业务成功码 0。
 - 管理员接口返回 24 个一级菜单、15 个用户及 1,725 条字典数据（初始化快照，后续数据变化时数量可不同）。
 - 浏览器登录成功，首页显示当前账号；用户管理页面载入，搜索 `admin` 后从 15 条缩小到 3 条。
-- 启动、停止脚本已实际执行，最终保留前后端运行。
+- 启动、停止脚本已实际执行，最终保留前后端运行。迁移到 `1Develop` 后重新完成后端打包、前端生产构建、完整类型检查、启动、登录与代表性 API 验证；前端 HTML 和入口模块均返回 HTTP 200。
 
 本机默认配置未提供 `/actuator/health`，该地址会被统一错误处理返回业务码 404；启动脚本使用实际租户查询接口并检查业务成功码判断后端就绪，避免将单纯 HTTP 200 误判为成功。
 

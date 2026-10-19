@@ -25,5 +25,5 @@
 | 日期 | 记录 | 说明 |
 | --- | --- | --- |
 | 2026-10-19 | [PowerShell 进程时间记录](pitfalls/p-003-powershell-json-process-time.md) | 避免 JSON 自动日期转换影响重复启动和停止 |
-| 2026-10-19 | [Vite 路径问题](pitfalls/p-001-vite-path-special-character.md) | 含 # 路径与 pnpm 绝对链接的处理 |
+| 2026-10-19 | [Vite 路径问题](pitfalls/p-001-vite-path-special-character.md) | 已改名为 1Develop，完整重建 pnpm 旧绝对链接 |
 | 2026-10-19 | [Redis 空密码问题](pitfalls/p-002-redisson-empty-password.md) | 无密码实例应省略 password 字段 |
